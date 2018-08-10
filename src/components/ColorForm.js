@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { addColor } from '../actions/colors'
 
 class ColorForm extends Component {
   constructor(props) {
@@ -17,7 +20,7 @@ class ColorForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault()
-    this.props.handleAddNewColor({
+    this.props.addColor({
       value: this.state.color,
       name: this.state.name
     })
@@ -56,4 +59,8 @@ class ColorForm extends Component {
   }
 }
 
-export default ColorForm
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addColor
+}, dispatch)
+
+export default connect(null, mapDispatchToProps)(ColorForm)

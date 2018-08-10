@@ -1,16 +1,24 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { selectColor } from '../actions/colors'
 
-const ColorList = ({ colors, handleToggleColorSelection }) => {
-  const lis = colors.map((color, i) => {
+const ColorList = ({ colors, selectColor }) => {
+  const lis = colors.map((color, index) => {
     const style = { backgroundColor: color.selected ? color.value : 'white' }
     return <li
       className="list-group-item text-dark"
-      key={ i }
+      key={ index }
       style={ style }
-      onClick={ () => handleToggleColorSelection(i) }>{ color.name }</li>
+      onClick={ () => selectColor({index}) }>{ color.name }</li>
   })
 
   return <ul className="list-group">{ lis }</ul>
 }
 
-export default ColorList
+const mapStateToProps = ({ colors }) => ({ colors })
+const mapDispatchToProps = dispatch => bindActionCreators({
+  selectColor
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColorList)
