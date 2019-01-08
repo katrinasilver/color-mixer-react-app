@@ -29,11 +29,11 @@ class App extends Component {
           <div className="row">
             <div className="col-3">
               <h2 className="h4 text-center mb-4">Colors</h2>
-              <ColorList colors={ this.state.colors } />
+              <ColorList />
             </div>
             <div className="col">
               <h2 className="h4 text-center mb-4">Mix Result</h2>
-              <ColorMixer colors={ this.state.colors } />
+              <ColorMixer />
             </div>
             <div className="col-3">
               <h2 className="h4 text-center mb-4">Add a Color</h2>

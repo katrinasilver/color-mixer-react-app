@@ -1,25 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { selectColor } from '../actions/colors'
 
-
-const mapStateToProps = (state) => {
-  // these become props in your component
-  return { colors: state.colors }
-}
-
-const ColorList = ({ colors, handleToggleColorSelection }) => {
-  console.log('hello');
+const ColorList = ({ colors, dispatch }) => {
+  console.log(colors)
 
   const lis = colors.map((color, i) => {
     const style = { backgroundColor: color.selected ? color.value : 'white' }
     return <li
       className="list-group-item text-dark"
       key={ i }
-      style={ style }>{ color.name }</li>
+      style={ style }
+      onClick={() => dispatch(selectColor(i)) }>{ color.name }</li>
   })
 
   return <ul className="list-group">{ lis }</ul>
 }
 
-// export your component with
-export default connect(mapStateToProps, null)(ColorList)
+// these become props in your component
+const mapStateToProps = (state) => {
+  return { colors: state.colors }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return { dispatch }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColorList)

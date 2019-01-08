@@ -1,4 +1,5 @@
 import { mix } from 'ryb-color-mixer'
+import { connect } from 'react-redux'
 import React from 'react'
 
 const ColorMixer = ({ colors }) => {
@@ -9,4 +10,8 @@ const ColorMixer = ({ colors }) => {
   )
 }
 
-export default ColorMixer
+const mapStateToProps = (state) => {
+  return { colors: state.colors }
+}
+
+export default connect(mapStateToProps, null)(ColorMixer)
