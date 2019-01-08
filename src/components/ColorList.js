@@ -1,6 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const ColorList = ({ colors }) => {
+
+const mapStateToProps = (state) => {
+  // these become props in your component
+  return { colors: state.colors }
+}
+
+const ColorList = ({ colors, handleToggleColorSelection }) => {
+  console.log('hello');
+
   const lis = colors.map((color, i) => {
     const style = { backgroundColor: color.selected ? color.value : 'white' }
     return <li
@@ -12,4 +21,5 @@ const ColorList = ({ colors }) => {
   return <ul className="list-group">{ lis }</ul>
 }
 
-export default ColorList
+// export your component with
+export default connect(mapStateToProps, null)(ColorList)
